@@ -1,11 +1,42 @@
 import streamlit as st
 
-st.set_page_config(page_title="Unit Converter", page_icon="⚖")
+st.set_page_config(page_title="Unit Converter", page_icon="⚖", layout="centered")
 
-st.title("Unit Converter Application")
-st.write("A simple web-based unit converter that allows users to convert between Length, Weight, Temperature, Volume, and Time.")
+st.markdown("""
+    <style>
+        .stButton>button {
+            margin-top: 15px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid grey;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .warning-message, .success-message {
+            margin-top: 15px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #FFF3CD;
+            color: #856404;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .success-message {
+            padding: 15px;
+            background-color: #D4EDDA;
+            color: #155724;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
+
+st.markdown("<h1 style='text-align: center; color: #2c3e50;'>⚖ Unit Converter Application</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 18px; color: #555;'>Convert Length, Weight, Temperature, Volume, and Time easily!</p>", unsafe_allow_html=True)
+st.write("\n")
 st.write("### Choose a Conversion Category")
+
 
 units = {
     "Length": ["Meters", "Kilometers", "Miles", "Feet"],
@@ -15,8 +46,8 @@ units = {
     "Time": ["Seconds", "Minutes", "Hours", "Days"]
 }
 
-category = st.selectbox("Select a Category", list(units.keys()))
 
+category = st.selectbox("Select a Category", list(units.keys()))
 from_unit = st.selectbox("Convert From", ["-- Select Unit --"] + units[category], index=0)
 to_unit = st.selectbox("Convert To", ["-- Select Unit --"] + units[category], index=0)
 
@@ -54,9 +85,15 @@ def convert(value, from_unit, to_unit):
             return (value - 273.15) * 9/5 + 32
     return value
 
+
 if st.button("Convert"):
     if from_unit == "-- Select Unit --" or to_unit == "-- Select Unit --":
-        st.warning("Please select valid units before converting.")
+        st.markdown("<div class='warning-message'>⚠️ Please select valid units before converting.</div>", unsafe_allow_html=True)
+
     else:
         result = convert(value, from_unit, to_unit)
-        st.write(f"### Result: {value} {from_unit}  =  {result:.2f} {to_unit}")
+        st.markdown(
+            f"<div class='success-message'>Result: &nbsp; <strong>{value} {from_unit}</strong>&nbsp; =&nbsp; <strong>{result:.2f} {to_unit}</strong></div>",
+                 unsafe_allow_html=True
+)
+
