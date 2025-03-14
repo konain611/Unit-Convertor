@@ -1,5 +1,7 @@
 import streamlit as st
 
+st.set_page_config(page_title="Unit Converter", page_icon="⚖")
+
 st.title("Unit Converter Application")
 st.write("A simple web-based unit converter that allows users to convert between Length, Weight, Temperature, Volume, and Time.")
 
@@ -17,8 +19,6 @@ category = st.selectbox("Select a Category", list(units.keys()))
 
 from_unit = st.selectbox("Convert From", ["-- Select Unit --"] + units[category], index=0)
 to_unit = st.selectbox("Convert To", ["-- Select Unit --"] + units[category], index=0)
-
-st.write("\n")
 
 value = st.number_input("Enter value to convert", min_value=0.0, format="%.2f")
 
