@@ -18,21 +18,7 @@ category = st.selectbox("Select a Category", list(units.keys()))
 from_unit = st.selectbox("Convert From", ["-- Select Unit --"] + units[category], index=0)
 to_unit = st.selectbox("Convert To", ["-- Select Unit --"] + units[category], index=0)
 
-st.markdown(
-    """
-    <script>
-    function selectAllOnClick() {
-        document.querySelectorAll('input[type="number"]').forEach(el => {
-            el.addEventListener('focus', function(event) {
-                event.target.select();
-            });
-        });
-    }
-    document.addEventListener("DOMContentLoaded", selectAllOnClick);
-    </script>
-    """,
-    unsafe_allow_html=True
-)
+st.write("\n")
 
 value = st.number_input("Enter value to convert", min_value=0.0, format="%.2f")
 
